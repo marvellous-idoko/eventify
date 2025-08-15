@@ -34,8 +34,8 @@ async function verifyTransaction(res, ref, trxn__id) {
     try {
         // options.body = JSON.stringify({ email, amount: parseFloat(amount) * 100, callback_url:`http://localhost:3000/verify-trxn?trxn__id=${generateRandomCharacters(10)}` });
         console.log(options)
-        const trxn = await transactions.findOne({trxn__id,reference})
-    
+        const trxn = await transactions.findOne({ trxn__id, reference })
+
         let r = await (await fetch(
             `${process.env.PAYSTACKURL}/transaction/verify/${reference}`,
             options,
@@ -48,20 +48,18 @@ async function verifyTransaction(res, ref, trxn__id) {
         console.error(e)
     }
 }
-/transaction/verify /
+function generateRandomCharacters(length) {
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    let result = '';
+    const randomBytes = crypto.randomBytes(length);
 
-    function generateRandomCharacters(length) {
-        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-        const charactersLength = characters.length;
-        let result = '';
-        const randomBytes = crypto.randomBytes(length);
-
-        for (let i = 0; i < length; i++) {
-            result += characters.charAt(randomBytes[i] % charactersLength);
-        }
-
-        return result;
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(randomBytes[i] % charactersLength);
     }
+
+    return result;
+}
 
 // Generate 10 random characters
 const randomChars = generateRandomCharacters(10);
