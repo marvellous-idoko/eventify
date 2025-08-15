@@ -4,5 +4,24 @@
     "dotenv": "^17.2.1",
     "express": "^5.1.0",
     "mongoose": "^8.17.1"
-  }
+  },
+  "name": "eventify",
+  "version": "1.0.0",
+  "description": "an app",
+  "main": "server.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marvellous-idoko/eventify.git"
+  },
+  "author": "Idoko Marvellous",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marvellous-idoko/eventify/issues"
+  },
+  "homepage": "https://github.com/marvellous-idoko/eventify#readme"
 }
