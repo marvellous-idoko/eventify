@@ -1,4 +1,4 @@
-const BASE_URL = 'https://eventify.onrender.com/api'
+const BASE_URL = 'https://eventify-z6w6.onrender.com/api'
 function buy(price) {
     email = document.getElementById('inputEmail')
     email.style.display = 'block'
