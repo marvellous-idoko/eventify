@@ -59,6 +59,10 @@ app.use("/js", (req, res) => {
 app.use("/assets", (req, res) => {
     res.sendFile(__dirname + "/frontend/assets" + req.url);
 });
+app.use("/verify-trxn", (req, res) => {
+    res.sendFile(__dirname + "/frontend/verify.html");
+
+});
 app.use("/", (req, res) => {
     res.sendFile(__dirname + "/frontend/index.html");
 

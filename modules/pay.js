@@ -14,39 +14,51 @@ async function pay(res, amount, email) {
     let options = { method: "POST", headers, redirect: "follow" };
 
     try {
-        options.body = JSON.stringify({ email, amount: parseFloat(amount) * 100, callback_url: `${process.env.BASE_URL}/verify-trxn?trxn__id=${generateRandomCharacters(10)}` });
-        console.log(options)
+        const tId = generateRandomCharacters(10)
+        options.body = JSON.stringify({ email, amount: parseFloat(amount) * 100, callback_url: `${process.env.BASE_URL}/verify-trxn?trxn__id=${tId}` });
 
         let r = await (await fetch(
             `${process.env.PAYSTACKURL}/transaction/initialize`,
             options,
         )).json()
-        
-        console.log(r)
+        if (r.status) {
+            let trxn = new transactions({
+                ...r.data,
+                amount,
+                trxn__id: tId
+
+            }).save()
+            console.log(await trxn)
+            res.json(r)
+        }
     }
     catch (e) {
         res.statusCode(500).json({ msg: 'Error Occured', e })
         console.error(e)
     }
 }
-async function verifyTransaction(res, ref, trxn__id) {
+async function verifyTransaction(res, reference, trxn__id) {
     let options = { method: "GET", headers, redirect: "follow" };
 
     try {
-        // options.body = JSON.stringify({ email, amount: parseFloat(amount) * 100, callback_url:`http://localhost:3000/verify-trxn?trxn__id=${generateRandomCharacters(10)}` });
-        console.log(options)
         const trxn = await transactions.findOne({ trxn__id, reference })
-
+        console.log(trxn)
         let r = await (await fetch(
             `${process.env.PAYSTACKURL}/transaction/verify/${reference}`,
             options,
         )).json()
+        if (r.status) {
+            if (r.status && parseFloat(r.data.amount) / 100 == parseFloat(trxn.amount))
+                res.json(r)
+            else {
+                console.error('fraud detected')
+            }
+        }
 
-        console.log(r)
     }
     catch (e) {
-        res.statusCode(500).json({ msg: 'Error Occured', e })
         console.error(e)
+        res.statusCode(500).json({ msg: 'Error Occured', e })
     }
 }
 function generateRandomCharacters(length) {

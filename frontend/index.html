@@ -20,14 +20,22 @@
     </nav>
     <main>
         <div class="event__box">
-            <header>GiTex Conference</header>
+
+               <header style="display: flex; justify-content: space-between;">
+                <div>
+
+                    GiTex Conference 
+                </div>
+                <h3>#10,000</h3>
+                </header>
             <img src="/assets/images/imagesdf.webp" width="400" alt="Background Image">
             <p>
                 GITEX GLOBAL or GITEX is a computer expo held annually in Dubai, United Arab Emirates at Dubai World
                 Trade Center. The event underpins the rapid technology-driven transformations, investments and projects
                 shaping the economies of the Middle East, Africa and Asia.
             </p>
-            <button onclick="buy(10000)">Purchase Single Ticket</button>
+            <input type="email" style="display: none; font-size: medium;"   id="inputEmail" placeholder="enter email to proceed" required>
+            <button id="btn" onclick="buy(10000)">Purchase Single Ticket</button>
         </div>
     </main>
     <script src="./js/script.js"></script>
