@@ -1,0 +1,49 @@
+:root {
+    --dark__blue: #15154d;
+    --cyan: cyan;
+    --dark__cyan: #11cdcd;
+}
+
+html,
+body {
+    padding: 0;
+    margin: 0;
+    background-color: var(--dark__blue);
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.event__box {
+    width: 400px;
+    border: 1px var(--cyan) solid;
+    padding: 20px 0;
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.event__box header {
+    color: var(--cyan);
+    padding: 0 15px 15px;
+}
+
+.event__box button:hover {
+    background-color: var(--dark__cyan);
+}
+.event__box button {
+    margin: 0 10px;
+    align-self: end;
+    background-color: cyan;
+    color: var(--dark__blue);
+    font-size: medium;
+    border-radius: 10px;
+    padding: 10px;
+    border: 0;
+    cursor: pointer;
+    transition: all .38s;
+}
+
+.event__box p {
+    margin: 10px;
+}
