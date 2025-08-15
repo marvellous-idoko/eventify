@@ -14,13 +14,14 @@ async function pay(res, amount, email) {
     let options = { method: "POST", headers, redirect: "follow" };
 
     try {
-        options.body = JSON.stringify({ email, amount: parseFloat(amount) * 100, callback_url: `http://localhost:3000/verify-trxn?trxn__id=${generateRandomCharacters(10)}` });
+        options.body = JSON.stringify({ email, amount: parseFloat(amount) * 100, callback_url: `${process.env.BASE_URL}/verify-trxn?trxn__id=${generateRandomCharacters(10)}` });
         console.log(options)
 
         let r = await (await fetch(
             `${process.env.PAYSTACKURL}/transaction/initialize`,
             options,
         )).json()
+        
         console.log(r)
     }
     catch (e) {
